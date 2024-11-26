@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест асинхронности Flask</title>
+    <script>
+        async function sendSyncRequests() {
+            const responses = await Promise.all([
+                fetch('http://127.0.0.1:8000/sync_task/1'),
+                fetch('http://127.0.0.1:8000/sync_task/2'),
+                fetch('http://127.0.0.1:8000/sync_task/3')
+            ]);
+            const result = await Promise.all(responses.map(res => res.json()));
+            console.log(result);
+        }
+
+        async function sendAsyncRequests() {
+            const responses = await Promise.all([
+                fetch('http://127.0.0.1:8000/async_task/1'),
+                fetch('http://127.0.0.1:8000/async_task/2'),
+                fetch('http://127.0.0.1:8000/async_task/3')
+            ]);
+            const result = await Promise.all(responses.map(res => res.json()));
+            console.log(result);
+        }
+    </script>
+</head>
+<body>
+    <h1>Тест асинхронности Flask</h1>
+    <button onclick="sendSyncRequests()">Отправить синхронные запросы</button>
+    <button onclick="sendAsyncRequests()">Отправить асинхронные запросы</button>
+</body>
+</html>
