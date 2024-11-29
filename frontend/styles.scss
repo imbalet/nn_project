@@ -1,0 +1,181 @@
+$white: #ffffff;
+$red: #b71606;
+$gray: #d4d4d4;
+$black: #000000;
+$dark_gray: #141515;
+
+@mixin reset-margin-padding {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $white;
+    @include reset-margin-padding();
+}
+
+#top {
+    clip-path: polygon(0 0, 100% 0, 100% calc(95% - 6vw), 0 95%);
+    max-width: 100%;
+    text-align: center;
+    overflow-wrap: break-word;
+
+    h1 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: 5% auto;
+        max-width: 50%;
+        white-space: normal;
+        font-family: "Roboto";
+        font-weight: 900;
+        color: $white;
+        font-size: clamp(30px, 5vw, 70px);
+        @media screen and (max-width: 600px) {
+        }
+    }
+    #red {
+        color: $red;
+    }
+    #back {
+        width: 100%;
+        // position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    .scroll-arrow {
+        position: fixed;
+        bottom: 20px; /* Отступ от низа страницы */
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .arrow {
+        width: 20px; /* Ширина стрелки */
+        height: 20px; /* Высота стрелки */
+        border: solid #000; /* Цвет стрелки */
+        border-width: 0 2px 2px 0; /* Толщина линий стрелки */
+        margin: 2px; /* Отступ между линиями стрелки */
+        transform: rotate(45deg);
+    }
+}
+
+#selection {
+    width: 70%;
+    margin: auto;
+    // margin-top: 7vh;
+    margin-bottom: 10vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4vw;
+
+    #params {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 3vw;
+
+        .param {
+            cursor: pointer;
+            font-family: "Roboto";
+            font-weight: 500;
+            font-size: clamp(5px, 4vw, 30px);
+            background-color: $red;
+            color: $white;
+            border-radius: 20px;
+            display: inline-block;
+            text-align: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            transition: ease-out 100ms;
+            box-shadow: 4px 4px 4px #00000040;
+            // &:hover {
+            //     background-color: $white;
+            //     outline: solid 3px $red;
+            //     color: $red;
+            // }
+            &:active {
+                background-color: $white;
+                outline: solid 3px $red;
+                color: $red;
+            }
+        }
+        .pressed {
+            background-color: $white;
+            outline: solid 3px $red;
+            color: $red;
+        }
+    }
+    #search {
+        background: transparent;
+        border: solid 3px $red;
+        height: 7vh;
+        border-radius: 50px;
+        max-width: 700px;
+        // margin-top: 5vh;
+        font-family: "Roboto";
+        font-weight: 500;
+        font-size: clamp(3px, 4vw, 20px);
+        padding: 2%;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    #variants {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1vw;
+
+        .variant {
+            cursor: pointer;
+            background-color: $gray;
+            color: $black;
+            border-radius: 20px;
+            font-family: "Roboto";
+            font-weight: 500;
+            font-size: clamp(5px, 4vw, 30px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            padding: 10px;
+            gap: 1vw;
+            transition: ease-out 200ms;
+
+            img {
+                width: 10vw;
+                height: 10vw;
+                max-width: 100px;
+                max-height: 100px;
+            }
+
+            &:hover {
+                background-color: $white;
+                outline: solid 3px gray;
+            }
+            &:active {
+                background-color: $gray;
+                outline: none;
+            }
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    background-color: $dark_gray;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 calc(0% + 6vw));
+    display: inline-block;
+    padding-top: 6vw;
+    color: $gray;
+    p {
+        margin: 3%;
+    }
+}
