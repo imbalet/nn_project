@@ -11,7 +11,7 @@ import numpy as np
 
 # ---------------------------------
 
-MODEL_PATH = "my_model.keras"
+MODEL_PATH = "backend/my_model.keras"
 
 # ---------------------------------
 
