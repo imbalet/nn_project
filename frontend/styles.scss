@@ -79,22 +79,24 @@ body {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
-        gap: 3vw;
+        gap: 1vw;
 
         .param {
             cursor: pointer;
             font-family: "Roboto";
             font-weight: 500;
-            font-size: clamp(5px, 4vw, 30px);
+            font-size: clamp(5px, 2vw, 20px);
             background-color: $red;
             color: $white;
+            // max-height: 60px;
             border-radius: 20px;
             display: inline-block;
             text-align: center;
-            padding: 10px 20px;
+            padding: 1% 2%;
             box-sizing: border-box;
             transition: ease-out 100ms;
             box-shadow: 4px 4px 4px #00000040;
+
             // &:hover {
             //     background-color: $white;
             //     outline: solid 3px $red;
@@ -115,14 +117,22 @@ body {
     #search {
         background: transparent;
         border: solid 3px $red;
-        height: 7vh;
+        height: 6vw;
+        max-height: 80px;
         border-radius: 50px;
         max-width: 700px;
         // margin-top: 5vh;
         font-family: "Roboto";
         font-weight: 500;
-        font-size: clamp(3px, 4vw, 20px);
+        font-size: clamp(3px, 2vw, 20px);
         padding: 2%;
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+        }
         &:focus {
             outline: none;
         }
@@ -140,7 +150,7 @@ body {
             border-radius: 20px;
             font-family: "Roboto";
             font-weight: 500;
-            font-size: clamp(5px, 4vw, 30px);
+            font-size: clamp(5px, 2vw, 30px);
             display: flex;
             justify-content: center;
             align-items: center;
