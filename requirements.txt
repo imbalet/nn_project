@@ -1,0 +1,4 @@
+numpy==1.26.4
+sanic==24.6.0
+Sanic_Cors==2.2.0
+tensorflow==2.18.0
