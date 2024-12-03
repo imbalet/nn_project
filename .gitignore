@@ -2,3 +2,8 @@
 __pycache__/
 .venv/
 headers
+.env
+.vscode/*
+/creating_dataset/data/
+/creating_dataset/dataset.csv
+/training/used_cars/

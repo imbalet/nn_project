@@ -76,7 +76,8 @@ def fetch_offers(price_from, price_to, km_from=0, km_to=1_000_000):
                 response = requests.post(url, json=get_params(price_from, price_to, page, km_from, km_to), headers=headers)
                 data = response.json()
                 offers = [convert_offer(i) for i in data["offers"]]
-
+                if len(offers) == 0:
+                    break
                 with open(os.path.join(SAVE_PATH, f"data_{price_from}_{price_to}_{km_from}_{km_to}_{page}.json"), "w", encoding="utf8") as f:
                     json.dump(offers, f, ensure_ascii=False)
                 break
@@ -90,6 +91,34 @@ def fetch_offers(price_from, price_to, km_from=0, km_to=1_000_000):
 
 
 def convert_offer(offer: dict):
+    def safe_get(d: dict, keys: list, default=None):
+        for key in keys:
+            d = d.get(key, {})
+        return d if d else default
+
+    return {
+        "owners": safe_get(offer, ["documents", "owners_number"], "None"),
+        "year": safe_get(offer, ["documents", "year"], "None"),
+        "price": safe_get(offer, ["price_info", "price"], "None"),
+        "region": str(safe_get(offer, ["seller", "location"], {})),
+        "mileage": safe_get(offer, ["state", "mileage"], "None"),
+        "body_type": {"type": safe_get(offer, ["vehicle_info", "configuration", "body_type"], "None"), "name": safe_get(offer, ["vehicle_info", "configuration", "human_name"], "None")},
+        "mark": safe_get(offer, ["vehicle_info", "mark_info", "name"], "None"),
+        "model": safe_get(offer, ["vehicle_info", "model_info", "name"], "None"),
+        "super_gen": {"name": safe_get(offer, ["vehicle_info", "super_gen", "name"], "None"), "from": safe_get(offer, ["vehicle_info", "super_gen", "year_from"], "None"), "to": safe_get(offer, ["vehicle_info", "super_gen", "year_to"], "None")},
+        "complectation": safe_get(offer, ["vehicle_info", "complectation", "name"], "None"),
+        "steering_wheel": safe_get(offer, ["vehicle_info", "steering_wheel"], "None"),
+        "gear_type": safe_get(offer, ["vehicle_info", "tech_param", "gear_type"], "None"),
+        "engine": safe_get(offer, ["vehicle_info", "tech_param", "engine_type"], "None"),
+        "transmission": safe_get(offer, ["vehicle_info", "tech_param", "transmission"], "None"),
+        "power": safe_get(offer, ["vehicle_info", "tech_param", "power"], "None"),
+        "displacement": safe_get(offer, ["vehicle_info", "tech_param", "displacement"], "None"),
+        "characteristics": safe_get(offer, ["vehicle_info", "tech_param", "human_name"], "None"),
+        "color": offer.get("color_hex", "None"),
+    }
+
+
+def convert_offer_old(offer: dict):
     return {
         "owners": offer.get("documents", {}).get("owners_number", "None"),
         "year": offer.get("documents", {}).get("year", "None"),
@@ -113,8 +142,10 @@ def convert_offer(offer: dict):
         "url": offer.get("url", "None"),
     }
 
-with ThreadPoolExecutor(max_workers=35) as executor:
-    future_to_price = {executor.submit(fetch_offers, price, price + 1000): (price, price + 1000) for price in range(1000, 10000001, 1000)}
+
+INCREMENT = 5000
+with ThreadPoolExecutor(max_workers=30) as executor:
+    future_to_price = {executor.submit(fetch_offers, price, price + INCREMENT): (price, price + INCREMENT) for price in range(1000, 10000001, INCREMENT)}
 
     for future in as_completed(future_to_price):
         price = future_to_price[future]
@@ -122,4 +153,3 @@ with ThreadPoolExecutor(max_workers=35) as executor:
             future.result()
         except Exception as exc:
             print(f'Ошибка при парсинге с параметрами {price}: {exc}')
-

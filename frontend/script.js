@@ -4,7 +4,7 @@ let selectedData;
 
 let selectedParam = null;
 
-let variants = {};
+let variants;
 
 
 const showVariants = (text = "", num = 20) => {
@@ -50,7 +50,7 @@ const fetchVars = async (request, have = "") => {
 };
 
 const updateVariants = () => {
-    variants = {};
+    // variants = {};
     if (selectedParam !== null && params[selectedParam]["type"] == "str") {
         //TODO тут запрос с бека GET
         /*
@@ -69,7 +69,7 @@ const updateVariants = () => {
         let variants_answ = {
             "bmw": { "name": "БНВ", "pic": "images/penis.jpeg" },
         }
-        variants = variants_answ;
+        // variants = variants_answ;
         showVariants();
     }
     else if (params[selectedParam]["type"] == "num") {
@@ -126,6 +126,31 @@ const fetchParams = async () => {
     }
 };
 
+const fetchMarks = async () => {
+    try {
+        const response = await fetch("/marks");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+const fetchOtherCarInfo = async () => {
+    try {
+        const response = await fetch("/otherCarInfo");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     await fetchParams().then(data => params = data);
@@ -133,6 +158,14 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         acc[key] = null;
         return acc;
     }, {});
+
+    await fetchMarks().then(data => variants["mark"] = data);
+    await fetchOtherCarInfo().then((data) => {
+        for (let i of Object.keys(data)) {
+            variants[i] = data[i];
+        }
+    });
+
     updateParamsList();
     updateVariants();
     document.getElementById("search").addEventListener("keyup", (e) => {
