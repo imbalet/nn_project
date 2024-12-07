@@ -228,5 +228,5 @@ if __name__ == "__main__":
     for i in data["steering_wheel"]:
         insert_steering_wheel(conn, i, "Справа" if i == "RIGHT" else "Слева")
     
-    for i in data["gear_type"]:
+    # for i in data["gear_type"]:
         
