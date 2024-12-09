@@ -5,8 +5,9 @@ from sanic_cors import CORS
 import json
 import tensorflow as tf
 import numpy as np
-from files.json_db import Db
-from files.decoder import Decoder
+
+from tools.json_db import Db
+from tools.decoder import Decoder
 
 # ---------------------------------
 
