@@ -7,3 +7,4 @@ headers
 /creating_dataset/data/
 /creating_dataset/dataset.csv
 /training/used_cars/
+*.css.map

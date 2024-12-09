@@ -1,0 +1,66 @@
+{
+    "mark": {
+        "name": "Марка",
+        "type": "str"
+    },
+    "model": {
+        "name": "Модель",
+        "type": "str"
+    },
+    "super_gen_name": {
+        "name": "Поколение",
+        "type": "str"
+    },
+    "complectation": {
+        "name": "Комплектация",
+        "type": "str"
+    },
+    "steering_wheel": {
+        "name": "Положение руля",
+        "type": "str"
+    },
+    "owners": {
+        "name": "Число владельцев",
+        "type": "str"
+    },
+    "year": {
+        "name": "Год выпуска",
+        "type": "str"
+    },
+    "region": {
+        "name": "Регион",
+        "type": "str"
+    },
+    "mileage": {
+        "name": "Пробег",
+        "type": "num"
+    },
+    "body_type_type": {
+        "name": "Кузов",
+        "type": "str"
+    },
+    "gear_type": {
+        "name": "Привод",
+        "type": "str"
+    },
+    "engine": {
+        "name": "Двигатель",
+        "type": "str"
+    },
+    "transmission": {
+        "name": "Трансмиссия",
+        "type": "str"
+    },
+    "power": {
+        "name": "Мощность (л. с.)",
+        "type": "num"
+    },
+    "displacement": {
+        "name": "Объем двигателя",
+        "type": "num"
+    },
+    "color": {
+        "name": "Цвет",
+        "type": "str"
+    }
+}
