@@ -105,6 +105,34 @@ const updateVariants = async () => {
 };
 
 
+const showResults = (data) => {
+    const modal = document.createElement("div");
+    const modal_content = document.createElement("div");
+    const close_button = document.createElement("span");
+    const h2 = document.createElement("h2");
+    const p = document.createElement("p");
+
+    h2.textContent = "Оцененная стоимость автомобиля";
+    p.textContent = Math.ceil(data["predicted"]) + " Rub";
+    close_button.className = "close-button";
+    close_button.id = "closeModal";
+    close_button.textContent = "&times;";
+    modal_content.className = "modal-content";
+    modal_content.append(close_button);
+    modal_content.append(h2);
+    modal_content.append(p);
+    modal.className = "modal";
+    modal.append(modal_content);
+
+    close_button.addEventListener("click", (e) => {
+        //close modal
+        //reset all selections
+    });
+
+    document.body.append(modal);
+};
+
+
 const updateParamsList = () => {
     document.getElementById("params").innerHTML = "";
 
@@ -138,7 +166,7 @@ const updateParamsList = () => {
                 button.textContent = "Рассчитать";
                 button.addEventListener("click", (e) => {
                     if (Object.values(selectedData).every(value => value !== null)) {
-                        fetch_post("predict", selectedData).then(data => console.log(data));
+                        fetch_post("predict", selectedData).then(data => showResults(data));
                     }
                     else {
                         alert("hz");

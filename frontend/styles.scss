@@ -10,6 +10,7 @@ $dark_gray: #141515;
 }
 
 body {
+    font-family: "Roboto";
     background-color: $white;
     @include reset-margin-padding();
 }
@@ -67,7 +68,7 @@ body {
 
 #selection {
     width: 70%;
-    margin: auto;
+    // margin: auto;
     // margin-top: 7vh;
     margin-bottom: 10vh;
 
@@ -219,5 +220,51 @@ footer {
     color: $gray;
     p {
         margin: 3%;
+    }
+}
+
+#wrapper {
+    display: flex;
+    /* position: absolute; */
+    min-height: 100vh;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        backdrop-filter: blur(10px); /* Эффект блюра */
+    }
+
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
 }
