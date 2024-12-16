@@ -9,6 +9,10 @@ $dark_gray: #141515;
     padding: 0;
 }
 
+.blured {
+    filter: blur(10px);
+}
+
 body {
     font-family: "Roboto";
     background-color: $white;

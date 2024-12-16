@@ -55,7 +55,7 @@ class Db():
     def get_complectations_car(self, mark, model, gen):
         compl = Db._safe_get(self.car_info, [mark, model, gen])["complectation"]
         all_compl = self.get_complectation()
-        ret = list(filter(lambda x: x["type"] in compl, all_compl))
+        ret = list(map(lambda el: {"name": "Нет", "type": el["type"]} if el["name"] == mark+model else el, filter(lambda x: x["type"] in compl, all_compl)))
         return ret
 
     def get_engines_car(self, mark, model, gen):
@@ -85,7 +85,8 @@ class Db():
     def get_super_gen_names_car(self, mark, model):
         gens = Db._safe_get(self.car_info, [mark, model]).keys()
         all_gens = self.get_gens()
-        ret = list(filter(lambda x: x["type"] in gens, all_gens))
+        ret = list(map(lambda el: {"name": "Нет", "type": el["type"]} if el["name"] == mark+model else el, filter(lambda x: x["type"] in gens, all_gens)))
+        # ret = list(filter(lambda x: x["type"] in gens, all_gens))
         return ret
 
     def get_models_car(self, mark):

@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.blured {
+  filter: blur(10px);
+}
+
 body {
   font-family: "Roboto";
   background-color: #ffffff;

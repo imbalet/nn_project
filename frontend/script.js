@@ -116,17 +116,25 @@ const showResults = (data) => {
     p.textContent = Math.ceil(data["predicted"]) + " Rub";
     close_button.className = "close-button";
     close_button.id = "closeModal";
-    close_button.textContent = "&times;";
+    close_button.innerHTML = "&times;";
     modal_content.className = "modal-content";
     modal_content.append(close_button);
     modal_content.append(h2);
     modal_content.append(p);
     modal.className = "modal";
     modal.append(modal_content);
+    document.getElementById("wrapper").classList.add("blured");
 
     close_button.addEventListener("click", (e) => {
-        //close modal
-        //reset all selections
+        Object.keys(selectedData).forEach((key) => {
+            selectedData[key] = null; // Заменяем значение на null
+        });
+        selectedParam = null
+        updateParamsList();
+        updateVariants();
+
+        modal.remove();
+        document.getElementById("wrapper").classList.remove("blured");
     });
 
     document.body.append(modal);
