@@ -2,6 +2,7 @@
 let params;
 // Выбранные/введенные параметры
 let selectedData;
+let selectedDataNames;
 // Какой парметр в данный момент вводится/выбирается
 let selectedParam = null;
 
@@ -22,6 +23,7 @@ const showVariants = (text = "", num = 20) => {
             }
             newVar.addEventListener("click", () => {
                 selectedData[selectedParam] = el["type"];
+                selectedDataNames[selectedParam] = el["name"];
                 updateParamsList();
             });
             elems.push(newVar);
@@ -98,6 +100,7 @@ const updateVariants = async () => {
         button.textContent = "Подтвердить";
         button.addEventListener("click", (e) => {
             selectedData[selectedParam] = document.getElementById("search").value;
+            selectedDataNames[selectedParam] = document.getElementById("search").value;
             updateParamsList();
         });
         document.getElementById("search_wrapper").append(button);
@@ -127,7 +130,10 @@ const showResults = (data) => {
 
     close_button.addEventListener("click", (e) => {
         Object.keys(selectedData).forEach((key) => {
-            selectedData[key] = null; // Заменяем значение на null
+            selectedData[key] = null;
+        });
+        Object.keys(selectedDataNames).forEach((key) => {
+            selectedDataNames[key] = null;
         });
         selectedParam = null
         updateParamsList();
@@ -160,7 +166,7 @@ const updateParamsList = () => {
     for (let key of keys) {
         const newDiv = document.createElement('div');
         newDiv.className = 'param';
-        newDiv.innerHTML = selectedData[key] === null ? params[key]["name"] : selectedData[key];
+        newDiv.innerHTML = selectedDataNames[key] === null ? params[key]["name"] : selectedDataNames[key];
         newDiv.addEventListener("click", () => {
             const allParams = document.querySelectorAll('.param');
             allParams.forEach(param => param.classList.remove('pressed'));
@@ -248,6 +254,12 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         acc[key] = null;
         return acc;
     }, {});
+
+    selectedDataNames = Object.keys(params).reduce((acc, key) => {
+        acc[key] = null;
+        return acc;
+    }, {});
+
     updateParamsList();
 
 

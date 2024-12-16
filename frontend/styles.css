@@ -17,18 +17,35 @@ body {
   text-align: center;
   overflow-wrap: break-word;
 }
+@media (max-width: 600px) {
+  #top {
+    background-color: #141515;
+    width: 100%;
+    margin-bottom: 2%;
+  }
+}
 #top h1 {
-  position: absolute;
   left: 0;
   right: 0;
   top: 0;
   margin: 5% auto;
-  max-width: 50%;
   white-space: normal;
   font-family: "Roboto";
   font-weight: 900;
   color: #ffffff;
   font-size: clamp(30px, 5vw, 70px);
+}
+@media (min-width: 600px) {
+  #top h1 {
+    position: absolute;
+    max-width: 50%;
+  }
+}
+@media (max-width: 600px) {
+  #top h1 {
+    font-size: clamp(25px, 6vw, 60px);
+    margin-bottom: 8vw;
+  }
 }
 #top #red {
   color: #b71606;
@@ -38,6 +55,11 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
+}
+@media (max-width: 600px) {
+  #top #back {
+    display: none;
+  }
 }
 #top .scroll-arrow {
   position: fixed;
@@ -58,17 +80,31 @@ body {
 }
 
 #selection {
-  width: 70%;
   margin-bottom: 10vh;
   display: flex;
   flex-direction: column;
   gap: 4vw;
+}
+@media (min-width: 600px) {
+  #selection {
+    width: 70%;
+  }
+}
+@media (max-width: 600px) {
+  #selection {
+    width: 95%;
+  }
 }
 #selection #params {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 1vw;
+}
+@media (max-width: 600px) {
+  #selection #params {
+    gap: 2vw;
+  }
 }
 #selection #params .param {
   cursor: pointer;
@@ -84,6 +120,11 @@ body {
   box-sizing: border-box;
   transition: ease-out 100ms;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2509803922);
+}
+@media (max-width: 600px) {
+  #selection #params .param {
+    font-size: clamp(10px, 5vw, 20px);
+  }
 }
 #selection #params .param:active {
   background-color: #ffffff;
@@ -104,8 +145,13 @@ body {
   max-width: 700px;
   font-family: "Roboto";
   font-weight: 500;
-  font-size: clamp(3px, 2vw, 20px);
+  font-size: clamp(3px, 3vw, 20px);
   padding: 2%;
+}
+@media (max-width: 600px) {
+  #selection #search {
+    font-size: clamp(3px, 5vw, 30px);
+  }
 }
 #selection #search::-webkit-search-decoration, #selection #search::-webkit-search-cancel-button, #selection #search::-webkit-search-results-button, #selection #search::-webkit-search-results-decoration {
   display: none;
@@ -136,6 +182,11 @@ body {
   transition: ease-out 100ms;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2509803922);
 }
+@media (max-width: 600px) {
+  #selection .button {
+    font-size: clamp(5px, 6vw, 20px);
+  }
+}
 #selection .button:active {
   background-color: #ffffff;
   outline: solid 3px #b71606;
@@ -162,6 +213,11 @@ body {
   padding: 10px;
   gap: 1vw;
   transition: ease-out 200ms;
+}
+@media (max-width: 600px) {
+  #selection #variants .variant {
+    font-size: clamp(5px, 5vw, 30px);
+  }
 }
 #selection #variants .variant img {
   width: 10vw;
@@ -195,6 +251,17 @@ footer p {
   display: flex;
   /* position: absolute; */
   min-height: 100vh;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#content {
+  width: 100%;
+  display: flex;
+  /* position: absolute; */
+  /* min-height: 100vh; */
   flex-direction: column;
   align-content: stretch;
   justify-content: space-between;

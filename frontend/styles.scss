@@ -4,6 +4,8 @@ $gray: #d4d4d4;
 $black: #000000;
 $dark_gray: #141515;
 
+$small-screen: 600px;
+
 @mixin reset-margin-padding {
     margin: 0;
     padding: 0;
@@ -20,18 +22,31 @@ body {
 }
 
 #top {
+    // @media (min-width: $small-screen) {
     clip-path: polygon(0 0, 100% 0, 100% calc(95% - 6vw), 0 95%);
+    // }
+    @media (max-width: $small-screen) {
+        background-color: $dark_gray;
+        width: 100%;
+        margin-bottom: 2%;
+    }
     max-width: 100%;
     text-align: center;
     overflow-wrap: break-word;
 
     h1 {
-        position: absolute;
+        @media (min-width: $small-screen) {
+            position: absolute;
+            max-width: 50%;
+        }
+        @media (max-width: $small-screen) {
+            font-size: clamp(25px, 6vw, 60px);
+            margin-bottom: 8vw;
+        }
         left: 0;
         right: 0;
         top: 0;
         margin: 5% auto;
-        max-width: 50%;
         white-space: normal;
         font-family: "Roboto";
         font-weight: 900;
@@ -44,6 +59,9 @@ body {
         color: $red;
     }
     #back {
+        @media (max-width: $small-screen) {
+            display: none;
+        }
         width: 100%;
         // position: absolute;
         top: 0;
@@ -71,7 +89,12 @@ body {
 }
 
 #selection {
-    width: 70%;
+    @media (min-width: $small-screen) {
+        width: 70%;
+    }
+    @media (max-width: $small-screen) {
+        width: 95%;
+    }
     // margin: auto;
     // margin-top: 7vh;
     margin-bottom: 10vh;
@@ -84,6 +107,9 @@ body {
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
+        @media (max-width: $small-screen) {
+            gap: 2vw;
+        }
         gap: 1vw;
 
         .param {
@@ -91,6 +117,9 @@ body {
             font-family: "Roboto";
             font-weight: 500;
             font-size: clamp(5px, 2vw, 20px);
+            @media (max-width: $small-screen) {
+                font-size: clamp(10px, 5vw, 20px);
+            }
             background-color: $red;
             color: $white;
             // max-height: 60px;
@@ -120,6 +149,9 @@ body {
         }
     }
     #search {
+        @media (max-width: $small-screen) {
+            font-size: clamp(3px, 5vw, 30px);
+        }
         background: transparent;
         border: solid 3px $red;
         // height: 6vw;
@@ -130,7 +162,7 @@ body {
         // margin-top: 5vh;
         font-family: "Roboto";
         font-weight: 500;
-        font-size: clamp(3px, 2vw, 20px);
+        font-size: clamp(3px, 3vw, 20px);
         padding: 2%;
 
         &::-webkit-search-decoration,
@@ -152,6 +184,9 @@ body {
     }
 
     .button {
+        @media (max-width: $small-screen) {
+            font-size: clamp(5px, 6vw, 20px);
+        }
         border: none;
         cursor: pointer;
         font-family: "Roboto";
@@ -159,7 +194,6 @@ body {
         font-size: clamp(5px, 2vw, 20px);
         background-color: $red;
         color: $white;
-        // max-height: 60px;
         border-radius: 20px;
         display: inline-block;
         text-align: center;
@@ -181,6 +215,9 @@ body {
         gap: 1vw;
 
         .variant {
+            @media (max-width: $small-screen) {
+                font-size: clamp(5px, 5vw, 30px);
+            }
             cursor: pointer;
             background-color: $gray;
             color: $black;
@@ -231,6 +268,17 @@ footer {
     display: flex;
     /* position: absolute; */
     min-height: 100vh;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#content {
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    /* min-height: 100vh; */
     flex-direction: column;
     align-content: stretch;
     justify-content: space-between;
