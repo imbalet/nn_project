@@ -1,4 +1,4 @@
-FROM python:3.10.16-bookworm
+FROM tensorflow/tensorflow:latest
 
 WORKDIR /usr/src/app
 
@@ -11,8 +11,7 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend ./backend
-COPY frontend ./frontend
+COPY . ./backend
 
 EXPOSE 5000
 

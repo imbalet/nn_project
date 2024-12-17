@@ -1,6 +1,6 @@
 from sanic import Sanic
 from sanic.response import json as s_json
-from sanic.response import file
+# from sanic.response import file
 from sanic_cors import CORS
 import json
 import tensorflow as tf
@@ -17,7 +17,7 @@ MODEL_PATH = "backend/files/my_model.h5"
 
 app = Sanic(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
-app.static('/', 'frontend')
+# app.static('/', 'frontend')
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -44,9 +44,9 @@ with open("backend/files/params.json") as f:
 # -------------ROUTES--------------
 
 
-@app.get("/")
-async def home(request):
-    return await file('frontend/index.html')
+# @app.get("/")
+# async def home(request):
+#     return await file('frontend/index.html')
 
 
 @app.get("/api/params")
